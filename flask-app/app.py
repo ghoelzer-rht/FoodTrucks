@@ -6,7 +6,7 @@ import requests
 # Update to use Environment Variable to set Elasticsearch Host
 import os
 
-es = Elasticsearch(host=os.environ["ES_HOSTS"])
+es = Elasticsearch(host=os.environ["ES"])
 
 app = Flask(__name__)
 
