@@ -3,8 +3,10 @@ import time
 from flask import Flask, jsonify, request, render_template
 import sys
 import requests
+# Update to use Environment Variable to set Elasticsearch Host
+import os
 
-es = Elasticsearch(host='es')
+es = Elasticsearch(host=os.environ["ES_HOSTS"])
 
 app = Flask(__name__)
 
@@ -28,6 +30,7 @@ def safe_check_index(index, retry=3):
         return status
     except exceptions.ConnectionError as e:
         print "Unable to connect to ES. Retrying in 5 secs..."
+        print os.environ["ES_HOSTS"]
         time.sleep(5)
         safe_check_index(index, retry-1)
 
